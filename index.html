@@ -1,36 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ralph Lee's CV</title>
-</head>
-<body style="margin: 0; padding: 20px; font-family: sans-serif;">
+  <title>Ralph Lee — CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <div style="text-align:center; margin-bottom:20px;">
-    <img src="https://flagcdn.com/w40/gb.png"  width="60"  onclick="showCV('en')">
-    <img src="https://flagcdn.com/w40/fr.png"  width="60"  onclick="showCV('fr')">
-    
-  </div>
-
-    <script>
-    function showCV(lang) {
-      const c = document.getElementById('cv-container');
-
-      if (lang === 'en') {
-        c.innerHTML = `
-          <img src="CV DEV ENGLISH 2025 BLUR.png" style="width:100%; max-width:900px;">
-        `;
-      }
-
-      if (lang === 'fr') {
-        c.innerHTML = `
-          <img src="CV DEV 2025 Redacted.png" style="width:100%; max-width:900px;">
-        `;
-      }
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
     }
 
-    // Default language
-    showCV('en');
-  </script>  
+    /* Flag styling */
+    .flags {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .flag {
+      height: 48px;         
+      margin: 0 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .flag:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    #cv-container {
+      text-align: center;
+    }
+
+    #cv-container img {
+      width: 100%;
+      max-width: 900px;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Flag buttons -->
+  <div class="flags">
+    <img id="btn-en" class="flag" src="https://flagsapi.com/GB/flat/64.png" alt="English">
+    <img id="btn-fr" class="flag" src="https://flagsapi.com/FR/flat/64.png" alt="Français">
+  </div>  
+  
+  <!-- CV container -->
+  <div id="cv-container"></div>
+
+  
+  <script>
+    function renderCV(src, alt) {
+      const c = document.getElementById('cv-container');
+      c.innerHTML = `<img src="${encodeURI(src)}" alt="${alt}">`;
+    }
+
+    // Set up event listeners
+    document.getElementById('btn-en').addEventListener('click', () => {
+      renderCV("CV DEV ENGLISH 2025 BLUR.png", "English CV");
+    });
+
+    document.getElementById('btn-fr').addEventListener('click', () => {
+      renderCV("CV DEV 2025 Redacted.png", "French CV");
+    });
+
+    // Load default CV after DOM is ready
+    renderCV("CV DEV ENGLISH 2025 BLUR.png", "English CV");
+  </script>
+
 </body>
 </html>
+
+
+
+
